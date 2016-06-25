@@ -11,19 +11,31 @@ const map: any = {
 };
 
 /** User packages configuration. */
-const packages: any = {
-};
-
-// put the names of any of your Material components here
-const materialPkgs:string[] = [
+const materialPackages:string[] = [
   'core',
+  'toolbar',
+  'icon',
   'button',
+  'sidenav',
+  'list',
   'card',
+  'input',
+  'radio',
+  'checkbox'
 ];
 
-materialPkgs.forEach((pkg) => {
-  packages[`@angular2-material/${pkg}`] = {main: `${pkg}.js`};
-});
+const packages:any = createCustomConfig(materialPackages);
+
+function createCustomConfig(packages: string[]): any {
+  return packages.reduce((packageConfig: any, packageName: string) => {
+    packageConfig[`@angular2-material/${packageName}`] = {
+      format: 'cjs',
+      defaultExtension: 'js',
+      main: packageName
+    };
+    return packageConfig;
+  }, {});
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************************************
