@@ -13,8 +13,10 @@ import {MdRadioButton, MdRadioGroup, MdRadioDispatcher} from '@angular2-material
 import {MdIcon, MdIconRegistry} from '@angular2-material/icon';
 
 import { SolrService  } from './solr.service';
-import { WikipediaService  } from './wikipedia.service';
-import { OpenDataService  } from './open-data/open-data.service';
+import { WikipediaService } from './wikipedia.service';
+import { OpenDataService } from './open-data/open-data.service';
+import { Manifestation } from './open-data/manifestation/manifestation.model';
+import { ManifestationDetailComponent } from './open-data/manifestation/manifestation-detail/manifestation-detail.component';
 
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -36,7 +38,8 @@ import 'rxjs/add/operator/switchMap';
     MdCheckbox,
     MdRadioGroup,
     MdRadioButton,
-    MdIcon
+    MdIcon, 
+    ManifestationDetailComponent
   ],
   providers: [MdIconRegistry, MdRadioDispatcher, SolrService, WikipediaService, OpenDataService],
 })
@@ -62,14 +65,6 @@ export class AppComponent implements OnInit {
       icon: "pets"
     }
   ];
-  dogs: Object[] = [
-    {name: "Porter"},
-    {name: "Mal"},
-    {name: "Razzle"},
-    {name: "Koby"},
-    {name: "Molly"},
-    {name: "Husi"}
-  ];
 
   constructor(private solr : SolrService, private wikipediaService: WikipediaService, private openDataService: OpenDataService) {
     this.items = this.term.valueChanges
@@ -82,6 +77,7 @@ export class AppComponent implements OnInit {
   {
     console.log("init app");
     //this.solr.getCustomers().subscribe(data => console.log(data));
+    this.openDataService.search('');
   }
 
 }

@@ -36,13 +36,14 @@ md-radio-button, md-checkbox {
   flex-grow: 1;
 }
 
-md-card {
-  width: 400px;
-  box-sizing: border-box;
-  margin: 16px;
-}
-
 .card-container {
   display: flex;
   flex-flow: row wrap;
+}
+
+manifestation-detail {
+  flex: 1 0 auto;
+  width: 400px;
+  box-sizing: border-box;
+  margin: 16px;
 }

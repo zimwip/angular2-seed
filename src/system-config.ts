@@ -57,6 +57,7 @@ const barrels: string[] = [
   // App specific barrels.
   'app',
   'app/shared',
+  'app/open-data/manifestation/manifestation-detail',
   /** @cli-barrel */
 ];
 
