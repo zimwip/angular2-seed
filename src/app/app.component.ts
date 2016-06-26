@@ -14,6 +14,7 @@ import {MdIcon, MdIconRegistry} from '@angular2-material/icon';
 
 import { SolrService  } from './solr.service';
 import { WikipediaService  } from './wikipedia.service';
+import { OpenDataService  } from './open-data/open-data.service';
 
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -37,7 +38,7 @@ import 'rxjs/add/operator/switchMap';
     MdRadioButton,
     MdIcon
   ],
-  providers: [MdIconRegistry, MdRadioDispatcher, SolrService, WikipediaService],
+  providers: [MdIconRegistry, MdRadioDispatcher, SolrService, WikipediaService, OpenDataService],
 })
 export class AppComponent implements OnInit {
 
@@ -46,7 +47,7 @@ export class AppComponent implements OnInit {
 
   term = new Control();
   
-  items: Observable<Array<string>>;
+  items: Observable<Array<Manifestation>>;
   
 
   views: Object[] = [
@@ -70,17 +71,17 @@ export class AppComponent implements OnInit {
     {name: "Husi"}
   ];
 
-  constructor(private solr : SolrService, private wikipediaService: WikipediaService) {
+  constructor(private solr : SolrService, private wikipediaService: WikipediaService, private openDataService: OpenDataService) {
     this.items = this.term.valueChanges
          .debounceTime(400)
          .distinctUntilChanged()
-         .switchMap(term => this.wikipediaService.search(term));
+         .switchMap(term => this.openDataService.search(term));
   };
 
   ngOnInit()
   {
     console.log("init app");
-    this.solr.getCustomers().subscribe(data => console.log(data));
+    //this.solr.getCustomers().subscribe(data => console.log(data));
   }
 
 }
