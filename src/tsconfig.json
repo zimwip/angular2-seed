@@ -15,7 +15,12 @@
     "target": "es5",
     "inlineSources": true
   },
-
+  "exclude": [
+    "../node_modules",
+    "../dist",
+    "../typings/main.d.ts",
+    "../typings/main"
+  ],
   "files": [
     "main.ts",
     "typings.d.ts"

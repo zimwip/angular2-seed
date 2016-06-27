@@ -14,6 +14,7 @@ import {MdIcon, MdIconRegistry} from '@angular2-material/icon';
 
 import { SolrService  } from './solr.service';
 import { WikipediaService } from './wikipedia.service';
+import { ElectronService } from './electron.service';
 import { OpenDataService } from './open-data/open-data.service';
 import { Manifestation } from './open-data/manifestation/manifestation.model';
 import { ManifestationDetailComponent } from './open-data/manifestation/manifestation-detail/manifestation-detail.component';
@@ -38,10 +39,16 @@ import 'rxjs/add/operator/switchMap';
     MdCheckbox,
     MdRadioGroup,
     MdRadioButton,
-    MdIcon, 
+    MdIcon,
     ManifestationDetailComponent
   ],
-  providers: [MdIconRegistry, MdRadioDispatcher, SolrService, WikipediaService, OpenDataService],
+  providers: [MdIconRegistry,
+    MdRadioDispatcher,
+    SolrService,
+    WikipediaService,
+    OpenDataService,
+    ElectronService
+  ],
 })
 export class AppComponent implements OnInit {
 
@@ -49,9 +56,8 @@ export class AppComponent implements OnInit {
   formShowing: boolean = false;
 
   term = new Control();
-  
+
   items: Observable<Array<Manifestation>>;
-  
 
   views: Object[] = [
     {
@@ -66,7 +72,10 @@ export class AppComponent implements OnInit {
     }
   ];
 
-  constructor(private solr : SolrService, private wikipediaService: WikipediaService, private openDataService: OpenDataService) {
+  constructor(private solr : SolrService,
+    private wikipediaService: WikipediaService,
+    private openDataService: OpenDataService,
+    private electron : ElectronService) {
     this.items = this.term.valueChanges
          .debounceTime(400)
          .distinctUntilChanged()
@@ -77,7 +86,12 @@ export class AppComponent implements OnInit {
   {
     console.log("init app");
     //this.solr.getCustomers().subscribe(data => console.log(data));
-    this.openDataService.search('');
+    this.openDataService.search('*');
+    this.electron.on('listDirSuccess', function(event, args)
+    {
+      console.log(args);
+    });
+    this.electron.send('listDir', 'D:/');
   }
 
 }
