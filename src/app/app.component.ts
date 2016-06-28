@@ -86,10 +86,12 @@ export class AppComponent implements OnInit {
   {
     console.log("init app");
     //this.solr.getCustomers().subscribe(data => console.log(data));
-    this.openDataService.search('*');
+//    this.electron.listen('listDirSuccess').subscribe(
+//                x => console.log("OnNext: {0}", x),
+//                ex => console.log("OnError: {0}", ex.Message),
+//                () => console.log("OnCompleted"));
     this.electron.on('on-ac', function() {
       console.log('on-ac');
-
     });
     this.electron.on('on-battery', function() {
       console.log('on-battery');
