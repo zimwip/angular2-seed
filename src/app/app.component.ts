@@ -86,21 +86,19 @@ export class AppComponent implements OnInit {
   {
     console.log("init app");
     //this.solr.getCustomers().subscribe(data => console.log(data));
-//    this.electron.listen('listDirSuccess').subscribe(
-//                x => console.log("OnNext: {0}", x),
-//                ex => console.log("OnError: {0}", ex.Message),
-//                () => console.log("OnCompleted"));
-    this.electron.on('on-ac', function() {
-      console.log('on-ac');
-    });
-    this.electron.on('on-battery', function() {
-      console.log('on-battery');
-    });
-    this.electron.on('listDirSuccess', function(event, args)
-    {
-      console.log(args);
-    });
-    this.electron.send('listDir', 'D:/');
+    this.electron.listen('listDirSuccess').subscribe(
+                x => console.log("OnNext: {0}", x),
+                ex => console.log("OnError: {0}", ex.Message),
+                () => console.log("OnCompleted"));
+    this.electron.listen('on-ac').subscribe(
+                x => console.log("on-ac", x),
+                ex => console.log("OnError: {0}", ex.Message),
+                () => console.log("OnCompleted"));
+    this.electron.listen('on-battery').subscribe(
+                x => console.log("on-battery", x),
+                ex => console.log("OnError: {0}", ex.Message),
+                () => console.log("OnCompleted"));
+    this.electron.send('listDir', '.');
   }
 
 }
