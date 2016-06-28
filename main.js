@@ -8,17 +8,7 @@ const Tray = electron.Tray;
 const ipcMain = electron.ipcMain;
 
 const fs = require('fs') // To read the directory listing
-
-ipcMain.on('close-main-window', function (event, args) {
-  app.quit();
-});
-
-ipcMain.on('listDir', function(event, arg) {
-  console.log("listDir", arg);
-  fs.readdir(arg[0], function(err, files) {
-    event.sender.send('listDirSuccess', files)
-  })
-})
+const log = require('./logger')
 
 let menuTemplate = require('./menuTemplate');
 // Module to create native browser window.
@@ -32,16 +22,7 @@ require('electron-reload')(__dirname + '/dist');
 let mainWindow, menu, trayMenu;
 
 let createWindow = () => {
-    // tray menu icon
-  trayMenu = new Tray(__dirname + '/dist/favicon.ico')
-  const contextMenu = Menu.buildFromTemplate([
-    {label: 'Item1', type: 'radio'},
-    {label: 'Item2', type: 'radio'},
-    {label: 'Item3', type: 'radio', checked: true},
-    {label: 'Item4', type: 'radio'}
-  ]);
-  trayMenu.setToolTip('This is my application.')
-  trayMenu.setContextMenu(contextMenu)
+
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800,
@@ -72,13 +53,18 @@ let createWindow = () => {
   toggleNewWindowTask(false);
 }
 
+let applicationClose = () => {
+  log.info('Stopping application');
+  app.quit();
+};
+
 let toggleFileTasks = isEnabled => {
   // The 'File' menu should only be available if there is an open window
   menu.items
     .find(item => item.label === 'File')
     .submenu.items
     .forEach(subItem => subItem.enabled = isEnabled);
-}
+};
 
 let toggleNewWindowTask = isEnabled => {
   // The 'New Window' task in the main menu and dock menu
@@ -89,7 +75,7 @@ let toggleNewWindowTask = isEnabled => {
     .find(subItem => subItem.label === 'New');
 
   newWindowMenu.enabled = isEnabled;
-}
+};
 
 let setMenu = () => {
   // Set custom click handlers for menu tasks
@@ -112,18 +98,71 @@ let setMenu = () => {
 
   menu = Menu.buildFromTemplate(menuTemplate);
   Menu.setApplicationMenu(menu);
-}
+};
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
-app.on('ready', createWindow);
+app.on('ready', () => {
+  log.info('Starting application');
+
+  // tray menu icon
+  trayMenu = new Tray(__dirname + '/dist/favicon.ico');
+  const contextMenu = Menu.buildFromTemplate([
+      {
+          label: 'Sound machine',
+          enabled: false
+      },
+      {
+          label: 'Settings',
+          click: function () {
+              log.info("click on setting");
+          }
+      },
+      {
+          label: 'Quit',
+          click: function () {
+              applicationClose();
+          }
+      }
+  ]);
+  trayMenu.setToolTip('This is my application.');
+  trayMenu.setContextMenu(contextMenu);
+
+  // adding power monitor function
+  electron.powerMonitor.on('suspend', function() {
+   log.info('The system is going to sleep');
+   if (mainWindow) mainWindow.webContents.send('sleep');
+  });
+  electron.powerMonitor.on('resume', function() {
+   log.info('The system is going to resume');
+   if (mainWindow) mainWindow.webContents.send('resume');
+  });
+  electron.powerMonitor.on('on-ac', function() {
+   log.info('The system is going to ac mode');
+   if (mainWindow) mainWindow.webContents.send('on-ac');
+  });
+  electron.powerMonitor.on('on-battery', function() {
+   log.info('The system is going to battery mode');
+   if (mainWindow) mainWindow.webContents.send('on-battery');
+  });
+
+  // Attach events
+  ipcMain.on('listDir', function(event, arg) {
+    log.info("listDir", arg);
+    fs.readdir(arg[0], function(err, files) {
+      event.sender.send('listDirSuccess', files)
+    })
+  });
+  createWindow();
+  }
+);
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
-    app.quit();
+    applicationClose();
   }
 });
 
