@@ -17,18 +17,18 @@ export class ElectronService {
   listen(channel: string): Observable<any> {
     return Observable.create(function(observer) {
       let connection;
+      let hook = (event, args) => {
+        observer.next(args);
+      }
       if (electron) {
-        connection = electron.ipcRenderer.on(channel, function(event, args)
-        {
-          observer.next(args);
-        });
+        connection = electron.ipcRenderer.on(channel, hook);
       }
       else {
         observer.complete();
       }
       // Note that this is optional, you do not have to return this if you require no cleanup
       return function() {
-        if (connection) connection.destroy();
+        electron.ipcRenderer.removeListener(channel, hook);
       };
     });
   }

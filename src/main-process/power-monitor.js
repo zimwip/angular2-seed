@@ -3,28 +3,41 @@ const electron = require('electron');
 // Module to control application life.
 const app = electron.app;
 const log = require('../../logger')
-var mainWindows;
-
-app.on('browser-window-created', function (event, win) {
-  mainWindows = win;
-})
+// Module to create native browser window.
+const BrowserWindow = electron.BrowserWindow;
 
 app.on('ready', () => {
 // adding power monitor function
 electron.powerMonitor.on('suspend', function() {
   log.info('The system is going to sleep');
-  if (mainWindow) mainWindow.webContents.send('sleep');
+  let mainWindows = BrowserWindow.getAllWindows();
+  for (var i = 0; i < mainWindows.length; i++)
+  {
+    mainWindows[i].webContents.send('sleep');
+  }
 });
 electron.powerMonitor.on('resume', function() {
   log.info('The system is going to resume');
-  if (mainWindow) mainWindow.webContents.send('resume');
+  let mainWindows = BrowserWindow.getAllWindows();
+  for (var i = 0; i < mainWindows.length; i++)
+  {
+    mainWindows[i].webContents.send('resume');
+  }
 });
 electron.powerMonitor.on('on-ac', function() {
   log.info('The system is going to ac mode');
-  if (mainWindow) mainWindow.webContents.send('on-ac');
+  let mainWindows = BrowserWindow.getAllWindows();
+  for (var i = 0; i < mainWindows.length; i++)
+  {
+    mainWindows[i].webContents.send('on-ac');
+  }
 });
 electron.powerMonitor.on('on-battery', function() {
   log.info('The system is going to battery mode');
-  if (mainWindow) mainWindow.webContents.send('on-battery');
+  let mainWindows = BrowserWindow.getAllWindows();
+  for (var i = 0; i < mainWindows.length; i++)
+  {
+    mainWindows[i].webContents.send('on-battery');
+  }
 });
 });

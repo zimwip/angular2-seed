@@ -62,6 +62,11 @@ let createWindow = () => {
 
 let applicationClose = () => {
   log.info('Stopping application');
+  let mainWindows = BrowserWindow.getAllWindows();
+  for (var i = 0; i < mainWindows.length; i++)
+  {
+    mainWindows[i].webContents.send('application-stop');
+  }
   app.quit();
 };
 
