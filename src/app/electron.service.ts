@@ -28,7 +28,9 @@ export class ElectronService {
       }
       // Note that this is optional, you do not have to return this if you require no cleanup
       return function() {
+        if (electron) {
         electron.ipcRenderer.removeListener(channel, hook);
+        }
       };
     });
   }

@@ -6,6 +6,8 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class OpenDataService {
 
+  results: Observable<Array<Manifestation>>;
+
   constructor(private http: Http) {}
 
   search (term: string) : Observable<Array<Manifestation>> {
@@ -13,10 +15,14 @@ export class OpenDataService {
     search.set('q', term);
     search.set('rows', '9');
     search.set('sort', '-date_debut');
-    
+
     return this.http
               .get('https://data.toulouse-metropole.fr/api/records/1.0/search/?dataset=agenda-des-manifestations-culturelles-so-toulouse', { search })
               .map((response) => response.json().records);
+  }
+
+  listen() : Observable<Array<Manifestation>> {
+    return this.results;
   }
 
 }

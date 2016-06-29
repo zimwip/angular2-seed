@@ -1,66 +1,36 @@
-<md-sidenav-layout fullscreen>
-  <md-sidenav #sidenav>
-    <md-nav-list>
-      <a md-list-item *ngFor="let view of views">
-        <md-icon md-list-icon>{{view.icon}}</md-icon>
-        <span md-line>{{view.name}}</span>
-        <span md-line class="secondary">{{view.description}}</span>
-      </a>
-    </md-nav-list>
-  </md-sidenav>
+<top-menu></top-menu>
+<main-menu></main-menu>
 
-  <md-toolbar color="primary">
-    <button md-icon-button (click)="sidenav.open()">
-      <md-icon>menu</md-icon>
-    </button>
+<div id="main">
+  <div id="content">
     <!-- This fills the remaining space of the current row -->
+    <div>
     <span class="fill-space">{{title}}</span>
-    <md-input placeholder="Search" align="end" type="text" [ngFormControl]="term" class="search">
-    </md-input>
-    <button md-fab (click)="formShowing=!formShowing">
-      <md-icon>add</md-icon>
+    <input placeholder="Search" align="end" type="text" [ngFormControl]="term" class="search"/>
+    <button (click)="formShowing=!formShowing">
+      toggle
     </button>
-  </md-toolbar>
+    </div>
+    <div class="form" *ngIf="formShowing">
+      form
+    </div>
 
-  <div class="form" *ngIf="formShowing">
-    <md-card>
-      <md-card-title>Create your dog's profile</md-card-title>
-      <md-card-content>
-        <form>
-          <md-input placeholder="Name"></md-input>
-          <md-input placeholder="Favorite toy"></md-input>
-          <md-input placeholder="Description"></md-input>
-          <md-radio-group>
-            <md-radio-button value="Looking for love">Looking for love</md-radio-button>
-            <md-radio-button value="Just browsing">Just browsing</md-radio-button>
-          </md-radio-group>
-          <div>
-            <md-checkbox indeterminate="true">Is a good dog</md-checkbox>
-          </div>
-        </form>
-      </md-card-content>
-      <md-card-actions align="end">
-        <button md-raised-button color="accent">POST</button>
-      </md-card-actions>
-    </md-card>
+    <div
+      (dragover)="false"
+      (dragend)="false"
+      (drop)="handleDrop($event)"
+      style="height: 300px; border: 5px dotted #ccc;">
+      <p style="margin: 10px; text-align: center">
+        <strong>Drop Your Images Here</strong>
+      </p>
+    </div>
+
+    <ul>
+      <li *ngFor="let file of files | async">{{file}}</li>
+    </ul>
+
+    <div class="card-container">
+      <manifestation-detail *ngFor="let item of items | async" [manifestation]="item"></manifestation-detail>
+    </div>
   </div>
-
-  <div
-    (dragover)="false"
-    (dragend)="false"
-    (drop)="handleDrop($event)"
-    style="height: 300px; border: 5px dotted #ccc;">
-    <p style="margin: 10px; text-align: center">
-      <strong>Drop Your Images Here</strong>
-    </p>
-  </div>
-
-  <ul>
-    <li *ngFor="let file of files | async">{{file}}</li>
-  </ul>
-
-  <div class="card-container">
-    <manifestation-detail *ngFor="let item of items | async" [manifestation]="item"></manifestation-detail>
-  </div>
-
-</md-sidenav-layout>
+</div>

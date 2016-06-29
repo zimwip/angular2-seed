@@ -7,36 +7,21 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
-  '@angular2-material': 'vendor/@angular2-material',
+  'ng2-bootstrap' : 'vendor/ng2-bootstrap',
   'moment': 'vendor/moment/moment.js'
 };
 
 /** User packages configuration. */
-const materialPackages:string[] = [
-  'core',
-  'toolbar',
-  'icon',
-  'button',
-  'sidenav',
-  'list',
-  'card',
-  'input',
-  'radio',
-  'checkbox'
-];
+const packages: any = {
+  'ng2-bootstrap': {
+    format: 'cjs',
+    defaultExtension: 'js',
+    main: 'ng2-bootstrap.js'
 
-const packages:any = createCustomConfig(materialPackages);
+  }
+};
 
-function createCustomConfig(packages: string[]): any {
-  return packages.reduce((packageConfig: any, packageName: string) => {
-    packageConfig[`@angular2-material/${packageName}`] = {
-      format: 'cjs',
-      defaultExtension: 'js',
-      main: packageName
-    };
-    return packageConfig;
-  }, {});
-}
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************************************
@@ -59,6 +44,8 @@ const barrels: string[] = [
   'app',
   'app/shared',
   'app/open-data/manifestation/manifestation-detail',
+  'app/main-menu',
+  'app/top-menu',
   /** @cli-barrel */
 ];
 
