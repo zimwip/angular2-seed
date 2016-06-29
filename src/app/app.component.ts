@@ -56,6 +56,7 @@ export class AppComponent implements OnInit {
   formShowing: boolean = false;
 
   term = new Control();
+  files: Observable<Array<any>>;
 
   items: Observable<Array<Manifestation>>;
 
@@ -80,16 +81,13 @@ export class AppComponent implements OnInit {
          .debounceTime(400)
          .distinctUntilChanged()
          .switchMap(term => this.openDataService.search(term));
+    this.files = this.electron.listen('listDirSuccess');
   };
 
   ngOnInit()
   {
     console.log("init app");
     //this.solr.getCustomers().subscribe(data => console.log(data));
-    this.electron.listen('listDirSuccess').subscribe(
-                x => console.log("OnNext: {0}", x),
-                ex => console.log("OnError: {0}", ex.Message),
-                () => console.log("OnCompleted"));
     this.electron.listen('on-ac').subscribe(
                 x => console.log("on-ac", x),
                 ex => console.log("OnError: {0}", ex.Message),
@@ -100,5 +98,15 @@ export class AppComponent implements OnInit {
                 () => console.log("OnCompleted"));
     this.electron.send('listDir', '.');
   }
+
+  handleDrop(e) {
+   var files:File = e.dataTransfer.files;
+   Object.keys(files).forEach((key) => {
+     console.log(files[key]);
+   });
+
+   return false;
+ }
+
 
 }

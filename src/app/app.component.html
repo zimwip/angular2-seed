@@ -8,12 +8,14 @@
       </a>
     </md-nav-list>
   </md-sidenav>
-  
+
   <md-toolbar color="primary">
     <button md-icon-button (click)="sidenav.open()">
       <md-icon>menu</md-icon>
-    </button> {{title}}
-    <md-input placeholder="Search" align="end" type="text" [ngFormControl]="term">
+    </button>
+    <!-- This fills the remaining space of the current row -->
+    <span class="fill-space">{{title}}</span>
+    <md-input placeholder="Search" align="end" type="text" [ngFormControl]="term" class="search">
     </md-input>
     <button md-fab (click)="formShowing=!formShowing">
       <md-icon>add</md-icon>
@@ -42,6 +44,21 @@
       </md-card-actions>
     </md-card>
   </div>
+
+  <div
+    (dragover)="false"
+    (dragend)="false"
+    (drop)="handleDrop($event)"
+    style="height: 300px; border: 5px dotted #ccc;">
+    <p style="margin: 10px; text-align: center">
+      <strong>Drop Your Images Here</strong>
+    </p>
+  </div>
+
+  <ul>
+    <li *ngFor="let file of files | async">{{file}}</li>
+  </ul>
+
   <div class="card-container">
     <manifestation-detail *ngFor="let item of items | async" [manifestation]="item"></manifestation-detail>
   </div>

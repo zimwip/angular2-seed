@@ -4,6 +4,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.fill-space {
+  flex: 1 1 auto;
+}
+
+.search {
+  width : 20%;
+}
+
 .secondary {
   color: rgba(0,0,0,0.54);
 }
