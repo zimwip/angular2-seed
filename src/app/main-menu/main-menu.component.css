@@ -40,7 +40,7 @@
 
 #main-menu .menu-search:before {
   content: "";
-  background: url("../app/assets/images/search-doc.png") no-repeat 50% 50%;
+  background: url("app/assets/images/search-doc.png") no-repeat 50% 50%;
   background-size: contain;
   width: 16px;
   height: 16px;
