@@ -12,9 +12,11 @@ import {
 
 import { MainMenuComponent } from './main-menu.component';
 
+beforeEachProviders(() => [MainMenuComponent]);
+
 describe('Component: MainMenu', () => {
-  it('should create an instance', () => {
-    let component = new MainMenuComponent();
+  it('should create an instance',
+      inject([MainMenuComponent], (component: MainMenuComponent) => {
     expect(component).toBeTruthy();
-  });
+  }));
 });

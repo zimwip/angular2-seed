@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {URLSearchParams, Http} from '@angular/http';
-import { Manifestation } from './manifestation/manifestation.model';
+import { Manifestation } from '../model';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()

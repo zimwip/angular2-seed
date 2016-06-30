@@ -166,3 +166,31 @@
 #main-menu .section .item li:not(.active):hover {
   cursor: pointer;
 }
+
+@media (max-width: 1020px) {
+
+  #mobile-main-menu {
+    display: inline-block;
+  }
+
+  #main-menu {
+    left: -100%;
+    height: calc(100% - 69px);
+  }
+
+  .isOpenMenu #main-menu {
+    left: 0;
+  }
+
+  #main {
+    width: 100%;
+    float: none;
+  }
+}
+
+@media (max-width: 600px) {
+
+  #main-menu {
+    height: calc(100% - 55px);
+  }
+}

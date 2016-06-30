@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Manifestation } from '../manifestation.model';
+import { Manifestation } from '../../model';
 
 @Component({
   moduleId: module.id,

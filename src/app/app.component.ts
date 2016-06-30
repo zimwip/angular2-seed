@@ -4,14 +4,13 @@ import { Observable } from 'rxjs/Observable';
 
 import { BUTTON_DIRECTIVES  } from 'ng2-bootstrap';
 
-import { SolrService  } from './solr.service';
-import { WikipediaService } from './wikipedia.service';
-import { ElectronService } from './electron.service';
-import { OpenDataService } from './open-data/open-data.service';
-import { Manifestation } from './open-data/manifestation/manifestation.model';
-import { ManifestationDetailComponent } from './open-data/manifestation/manifestation-detail/manifestation-detail.component';
-import { MainMenuComponent } from './main-menu/main-menu.component';
-import { TopMenuComponent } from './top-menu/top-menu.component';
+import { SolrService,
+         WikipediaService,
+         ElectronService,
+         OpenDataService } from './services';
+import { Manifestation } from './model';
+import { ManifestationDetailComponent } from './components';
+import { CONFIG, TopMenuComponent, MainMenuComponent } from './shared';
 
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -41,6 +40,7 @@ export class AppComponent implements OnInit {
   title = 'app works!';
   formShowing: boolean = false;
 
+  acOn = 'not intialized';
   term = new Control();
 
   files: Observable<Array<any>>;
@@ -50,25 +50,24 @@ export class AppComponent implements OnInit {
     private wikipediaService: WikipediaService,
     private openDataService: OpenDataService,
     private electron : ElectronService) {
-    this.items = this.term.valueChanges
-         .debounceTime(400)
-         .distinctUntilChanged()
-         .switchMap(term => this.openDataService.search(term));
-    this.files = this.electron.listen('listDirSuccess');
   };
 
   ngOnInit()
   {
-    console.log("init app");
     //this.solr.getCustomers().subscribe(data => console.log(data));
+    this.items = this.term.valueChanges
+         .debounceTime(400)
+         .distinctUntilChanged()
+         .switchMap(term => this.openDataService.search(term));
     this.electron.listen('on-ac').subscribe(
-                x => console.log("on-ac", x),
+                x => {console.log("on-ac", x); this.acOn='on-ac';},
                 ex => console.log("OnError: {0}", ex.Message),
                 () => console.log("OnCompleted"));
     this.electron.listen('on-battery').subscribe(
-                x => console.log("on-battery", x),
+                x => {console.log("on-battery", x); this.acOn='on-battery';},
                 ex => console.log("OnError: {0}", ex.Message),
                 () => console.log("OnCompleted"));
+    this.files = this.electron.listen('listDirSuccess');
     this.electron.send('listDir', '.');
   }
 

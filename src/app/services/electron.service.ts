@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 declare var electron: any;
@@ -6,7 +6,7 @@ declare var electron: any;
 @Injectable()
 export class ElectronService {
 
-  constructor() { }
+  constructor(private zone: NgZone) { }
 
   send(channel: string, ...args) {
     if (electron) {
@@ -15,11 +15,14 @@ export class ElectronService {
   }
 
   listen(channel: string): Observable<any> {
+    let localZone = this.zone;
     return Observable.create(function(observer) {
       let connection;
       let hook = (event, args) => {
-        observer.next(args);
-      }
+        localZone.run(() => {
+          observer.next(args);
+        });
+      };
       if (electron) {
         connection = electron.ipcRenderer.on(channel, hook);
       }

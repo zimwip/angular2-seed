@@ -5,7 +5,8 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 
-import { OpenDataService } from '../open-data/open-data.service';
+import { OpenDataService } from '../../services';
+import { Manifestation } from '../../model';
 
 @Component({
   moduleId: module.id,
@@ -18,15 +19,16 @@ import { OpenDataService } from '../open-data/open-data.service';
 })
 export class MainMenuComponent implements OnInit {
 
-  term = new Control();
-  routes : Observable<Array<any>>;
+  search = new Control();
+  results :  Observable<Array<Manifestation>>;
 
   constructor(private openDataService: OpenDataService) {
-    this.routes = this.term.valueChanges
+    this.results = this.search.valueChanges
          .debounceTime(400)
          .distinctUntilChanged()
          .switchMap(term => this.openDataService.search(term));
   }
+
 
   ngOnInit() {
   }

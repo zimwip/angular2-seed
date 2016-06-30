@@ -12,4 +12,4 @@ if (environment.production) {
 bootstrap(AppComponent, [
     HTTP_PROVIDERS,
     JSONP_PROVIDERS
-]).catch(err => console.error(err));       
+]).catch(err => console.error(err));

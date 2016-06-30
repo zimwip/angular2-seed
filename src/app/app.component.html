@@ -5,8 +5,9 @@
   <div id="content">
     <!-- This fills the remaining space of the current row -->
     <div>
-    <span class="fill-space">{{title}}</span>
-    <input placeholder="Search" align="end" type="text" [ngFormControl]="term" class="search"/>
+    <span>{{title}}</span>
+    <span class="fill-space">{{acOn}}</span>
+    <input placeholder="Search..." align="end" type="text" [ngFormControl]="term"/>
     <button (click)="formShowing=!formShowing">
       toggle
     </button>
