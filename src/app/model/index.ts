@@ -1,1 +1,2 @@
-export * from './manifestation/manifestation.model';
+export * from './manifestation';
+export * from './query';

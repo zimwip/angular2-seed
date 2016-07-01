@@ -1,37 +1,7 @@
 <top-menu></top-menu>
 <main-menu></main-menu>
-
 <div id="main">
   <div id="content">
-    <!-- This fills the remaining space of the current row -->
-    <div>
-    <span>{{title}}</span>
-    <span class="fill-space">{{acOn}}</span>
-    <input placeholder="Search..." align="end" type="text" [ngFormControl]="term"/>
-    <button (click)="formShowing=!formShowing">
-      toggle
-    </button>
-    </div>
-    <div class="form" *ngIf="formShowing">
-      form
-    </div>
-
-    <div
-      (dragover)="false"
-      (dragend)="false"
-      (drop)="handleDrop($event)"
-      style="height: 300px; border: 5px dotted #ccc;">
-      <p style="margin: 10px; text-align: center">
-        <strong>Drop Your Images Here</strong>
-      </p>
-    </div>
-
-    <ul>
-      <li *ngFor="let file of files | async">{{file}}</li>
-    </ul>
-
-    <div class="card-container">
-      <manifestation-detail *ngFor="let item of items | async" [manifestation]="item"></manifestation-detail>
-    </div>
+    <router-outlet></router-outlet>
   </div>
 </div>

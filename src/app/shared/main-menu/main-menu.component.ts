@@ -13,9 +13,6 @@ import { Manifestation } from '../../model';
   selector: 'main-menu',
   templateUrl: 'main-menu.component.html',
   styleUrls: ['main-menu.component.css'],
-  providers: [
-    OpenDataService
-  ],
 })
 export class MainMenuComponent implements OnInit {
 
@@ -23,10 +20,16 @@ export class MainMenuComponent implements OnInit {
   results :  Observable<Array<Manifestation>>;
 
   constructor(private openDataService: OpenDataService) {
-    this.results = this.search.valueChanges
+    // bind search to query service.
+    this.search.valueChanges
          .debounceTime(400)
          .distinctUntilChanged()
-         .switchMap(term => this.openDataService.search(term));
+         .subscribe(
+                     term => this.openDataService.search(term),
+                     ex => console.log("OnError: {0}", ex.Message),
+                     () => console.log("OnCompleted"));
+    // bind results to update facet.
+    this.results = this.openDataService.listen();
   }
 
 

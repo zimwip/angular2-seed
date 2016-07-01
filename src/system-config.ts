@@ -17,7 +17,6 @@ const packages: any = {
     format: 'cjs',
     defaultExtension: 'js',
     main: 'ng2-bootstrap.js'
-
   }
 };
 
@@ -48,8 +47,8 @@ const barrels: string[] = [
   'app/shared/main-menu',
   'app/shared/top-menu',
   'app/components',
-  'app/components/manifestation-detail'
-
+  'app/components/home',
+  'app/components/manifestation-detail',
   /** @cli-barrel */
 ];
 

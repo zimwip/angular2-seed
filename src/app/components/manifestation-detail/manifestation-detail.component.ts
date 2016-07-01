@@ -6,9 +6,7 @@ import { Manifestation } from '../../model';
   moduleId: module.id,
   selector: 'manifestation-detail',
   templateUrl: 'manifestation-detail.component.html',
-  directives: [
-
-  ],
+  directives: [],
   styleUrls: ['manifestation-detail.component.css']
 })
 export class ManifestationDetailComponent implements OnInit {

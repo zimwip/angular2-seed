@@ -17,14 +17,13 @@ export class ElectronService {
   listen(channel: string): Observable<any> {
     let localZone = this.zone;
     return Observable.create(function(observer) {
-      let connection;
       let hook = (event, args) => {
         localZone.run(() => {
           observer.next(args);
         });
       };
       if (electron) {
-        connection = electron.ipcRenderer.on(channel, hook);
+        electron.ipcRenderer.on(channel, hook);
       }
       else {
         observer.complete();

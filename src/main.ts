@@ -2,7 +2,12 @@ import { bootstrap } from '@angular/platform-browser-dynamic';
 import { enableProdMode } from '@angular/core';
 import { HTTP_PROVIDERS, JSONP_PROVIDERS } from '@angular/http';
 
-import { AppComponent, environment } from './app/';
+import { AppComponent, environment, APP_ROUTER_PROVIDERS  } from './app/';
+
+import { SolrService,
+         WikipediaService,
+         ElectronService,
+         OpenDataService } from './app/services';
 
 
 if (environment.production) {
@@ -11,5 +16,10 @@ if (environment.production) {
 
 bootstrap(AppComponent, [
     HTTP_PROVIDERS,
-    JSONP_PROVIDERS
+    JSONP_PROVIDERS,
+    APP_ROUTER_PROVIDERS,
+    SolrService,
+    WikipediaService,
+    ElectronService,
+    OpenDataService
 ]).catch(err => console.error(err));
