@@ -28,12 +28,12 @@ export class MainMenuComponent implements OnInit {
                      term => this.openDataService.search(term),
                      ex => console.log("OnError: {0}", ex.Message),
                      () => console.log("OnCompleted"));
-    // bind results to update facet.
-    this.results = this.openDataService.listen();
+
   }
 
-
   ngOnInit() {
+    // bind results to update facet.
+    this.results = this.openDataService.listen();
   }
 
 }

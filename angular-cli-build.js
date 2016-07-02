@@ -19,6 +19,10 @@ module.exports = function(defaults) {
       'bootstrap/dist/**/*.+(js|js.map|css)',
       'ng2-bootstrap/**/*.+(ts|js|js.map)',
       'moment/moment.js'
-    ]
+    ],
+    sassCompiler: {
+      cacheExclude: [/\/_[^\/]+$/],
+      includePaths: [ 'node_modules/bootstrap/scss' ]
+    }
   });
 };

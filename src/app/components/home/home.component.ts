@@ -1,4 +1,4 @@
-import { Component, OnInit, Pipe, PipeTransform  } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform, forwardRef  } from '@angular/core';
 import { Control } from '@angular/common';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -14,7 +14,7 @@ import { SolrService,
          OpenDataService } from '../../services';
 import { Manifestation } from '../../model';
 
-//import { ManifestationDetailComponent } from '../../components';
+import { ManifestationDetailComponent } from '../';
 
 
 @Pipe({ name: 'byteFormat'})
@@ -39,7 +39,7 @@ class ByteFormatPipe implements PipeTransform {
   directives: [
     BUTTON_DIRECTIVES,
     ROUTER_DIRECTIVES,
-//    ManifestationDetailComponent
+    forwardRef(() => ManifestationDetailComponent)
   ]
 })
 export class HomeComponent implements OnInit {
@@ -57,7 +57,8 @@ export class HomeComponent implements OnInit {
     private wikipediaService: WikipediaService,
     private openDataService: OpenDataService,
     private electron : ElectronService) {
-  };
+    console.log("Home Component Created");
+  }
 
   ngOnInit()
   {
@@ -70,6 +71,7 @@ export class HomeComponent implements OnInit {
                 x => {console.log("on-battery", x); this.acOn='on-battery';},
                 ex => console.log("OnError: {0}", ex.Message),
                 () => console.log("OnCompleted"));
+
     this.items = this.openDataService.listen();
     this.files = this.electron.listen('listDirSuccess');
     this.electron.send('listDir', '.');

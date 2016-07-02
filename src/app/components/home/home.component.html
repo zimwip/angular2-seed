@@ -35,10 +35,23 @@
    </div>
  </div>
 
+
+<div [ngClass]="{'demo': true, 'is-open' : formShowing}">
+  <div class="demo-wrapper">
+    <button id="application-menu-demo-toggle" class="js-container-target demo-toggle-button">Create an application menu
+      <div class="demo-meta u-avoid-clicks">Supports: Win, OS X, Linux <span class="demo-meta-divider">|</span> Process: Main</div>
+    </button>
+    <div class="demo-box">
+      <p>The <code>Menu</code> and <code>MenuItem</code> modules allow you to customize your application menu. If you don't set any menu, Electron will generate a minimal menu for your app by default.</p>
+    </div>
+  </div>
+</div>
+
 <ul>
   <li *ngFor="let file of files | async">{{file}}</li>
 </ul>
 
-<div class="card-container">
-  <manifestation-detail *ngFor="let item of items | async" [manifestation]="item"></manifestation-detail>
+
+<div class="card-columns">
+  <manifestation-detail *ngFor="let item of items | async" [manifestation]="item" class="card"></manifestation-detail>
 </div>
