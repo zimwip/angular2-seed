@@ -1,4 +1,4 @@
-import { Component, OnInit, Pipe, PipeTransform, forwardRef  } from '@angular/core';
+import { Component, OnInit, OnDestroy, Pipe, PipeTransform, forwardRef  } from '@angular/core';
 import { Control } from '@angular/common';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -14,7 +14,7 @@ import { SolrService,
          OpenDataService } from '../../services';
 import { Manifestation } from '../../model';
 
-import { ManifestationDetailComponent } from '../';
+import { ManifestationDetailComponent, D3AreaComponent } from '../';
 
 
 @Pipe({ name: 'byteFormat'})
@@ -42,7 +42,7 @@ class ByteFormatPipe implements PipeTransform {
     forwardRef(() => ManifestationDetailComponent)
   ]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   title = 'app works!';
   formShowing: boolean = false;
@@ -52,6 +52,9 @@ export class HomeComponent implements OnInit {
   files: Observable<Array<any>>;
   images : Array<File> = [];
   items: Observable<Array<Manifestation>>;
+
+  private acPower: any;
+  private batteryPower: any;
 
   constructor(private solr : SolrService,
     private wikipediaService: WikipediaService,
@@ -63,11 +66,11 @@ export class HomeComponent implements OnInit {
   ngOnInit()
   {
     //this.solr.getCustomers().subscribe(data => console.log(data));
-    this.electron.listen('on-ac').subscribe(
+    this.acPower = this.electron.listen('on-ac').subscribe(
                 x => {console.log("on-ac", x); this.acOn='on-ac';},
                 ex => console.log("OnError: {0}", ex.Message),
                 () => console.log("OnCompleted"));
-    this.electron.listen('on-battery').subscribe(
+    this.batteryPower = this.electron.listen('on-battery').subscribe(
                 x => {console.log("on-battery", x); this.acOn='on-battery';},
                 ex => console.log("OnError: {0}", ex.Message),
                 () => console.log("OnCompleted"));
@@ -75,6 +78,11 @@ export class HomeComponent implements OnInit {
     this.items = this.openDataService.listen();
     this.files = this.electron.listen('listDirSuccess');
     this.electron.send('listDir', '.');
+  }
+
+  ngOnDestroy() {
+    this.acPower.unsubscribe();
+    this.batteryPower.unsubscribe();
   }
 
   handleDrop(e) {

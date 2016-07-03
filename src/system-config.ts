@@ -8,14 +8,12 @@
 /** Map relative paths to URLs. */
 const map: any = {
   'ng2-bootstrap' : 'vendor/ng2-bootstrap',
-  'moment': 'vendor/moment/moment.js'
+  'moment': 'vendor/moment/moment.js',
+  'd3': 'vendor/d3/d3.min.js',
 };
 
 /** User packages configuration. */
 const packages: any = {
-  'moment':{
-    format: 'cjs'
-  },
   'ng2-bootstrap': {
     format: 'cjs',
     defaultExtension: 'js',
@@ -52,6 +50,7 @@ const barrels: string[] = [
   'app/components',
   'app/components/home',
   'app/components/manifestation-detail',
+  'app/components/d3-area',
   /** @cli-barrel */
 ];
 

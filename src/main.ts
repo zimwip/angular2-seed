@@ -1,6 +1,8 @@
 import { bootstrap } from '@angular/platform-browser-dynamic';
+import { Title } from '@angular/platform-browser';
 import { enableProdMode } from '@angular/core';
 import { HTTP_PROVIDERS, JSONP_PROVIDERS } from '@angular/http';
+
 
 import { AppComponent, environment, APP_ROUTER_PROVIDERS  } from './app/';
 
@@ -14,7 +16,7 @@ if (environment.production) {
   enableProdMode();
 }
 
-bootstrap(AppComponent, [
+bootstrap(AppComponent, [Title,
     HTTP_PROVIDERS,
     JSONP_PROVIDERS,
     APP_ROUTER_PROVIDERS,

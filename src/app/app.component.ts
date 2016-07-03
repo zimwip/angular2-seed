@@ -1,4 +1,5 @@
 import { Component, OnInit} from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { CONFIG, TopMenuComponent, MainMenuComponent } from './shared';
 
@@ -18,8 +19,12 @@ import { CONFIG, TopMenuComponent, MainMenuComponent } from './shared';
 })
 export class AppComponent implements OnInit {
 
-  constructor() { };
+  constructor(private titleService: Title) { };
 
   ngOnInit() { };
+
+  public setTitle( newTitle: string) {
+   this.titleService.setTitle( newTitle );
+ }
 
 }
