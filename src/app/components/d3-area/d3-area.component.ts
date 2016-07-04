@@ -1,7 +1,7 @@
 import { Component, OnChanges, Input, ElementRef } from '@angular/core';
 import * as D3 from 'd3';
 import * as Moment from 'moment';
-import {AreaChartConfig} from '../../model';
+import { GraphDataSet } from './';
 
 @Component({
   moduleId: module.id,
@@ -11,7 +11,7 @@ import {AreaChartConfig} from '../../model';
 })
 export class D3AreaComponent implements OnChanges {
 
-  @Input() config: Array<AreaChartConfig>;
+  @Input() config: Array< GraphDataSet<Date> >;
 
   private host;
   private svg;
