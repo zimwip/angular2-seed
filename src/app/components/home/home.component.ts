@@ -14,7 +14,7 @@ import { SolrService,
          OpenDataService } from '../../services';
 import { Manifestation } from '../../model';
 
-import { ManifestationDetailComponent, D3AreaComponent } from '../';
+import { ManifestationDetailComponent } from '../';
 
 
 @Pipe({ name: 'byteFormat'})

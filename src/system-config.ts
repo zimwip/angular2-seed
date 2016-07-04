@@ -51,6 +51,7 @@ const barrels: string[] = [
   'app/components/home',
   'app/components/manifestation-detail',
   'app/components/d3-area',
+  'app/components/dashboard',
   /** @cli-barrel */
 ];
 

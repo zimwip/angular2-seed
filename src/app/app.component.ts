@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { CONFIG, TopMenuComponent, MainMenuComponent } from './shared';
+import { HomeComponent, DashboardComponent } from './components';
 
 
 
@@ -15,7 +16,8 @@ import { CONFIG, TopMenuComponent, MainMenuComponent } from './shared';
     ROUTER_DIRECTIVES,
     MainMenuComponent,
     TopMenuComponent
-  ]
+  ],
+  precompile: [HomeComponent, DashboardComponent]
 })
 export class AppComponent implements OnInit {
 

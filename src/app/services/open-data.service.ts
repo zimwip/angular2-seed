@@ -8,7 +8,7 @@ import { Manifestation, Query } from '../model';
 @Injectable()
 export class OpenDataService {
 
-  source : EventEmitter<Query> =  new EventEmitter();
+  source : EventEmitter<Query> =  new EventEmitter<Query>();
   results: Observable<Array<Manifestation>>;
 
   constructor(private http: Http) {

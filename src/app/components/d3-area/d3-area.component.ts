@@ -117,7 +117,7 @@ export class D3AreaComponent implements OnChanges {
           .x((d: any) => this.xScale(d.x))
           .y0(this.height)
           .y1((d: any) => this.yScale(d.y))
-          .interpolate(area.settings.interpolation));
+        );
     });
   }
 }
