@@ -1,14 +1,17 @@
 <!doctype html>
 <html>
 <head>
+  <base href=".">
   <meta charset="utf-8">
-  <title>MicroserviceFront</title>
-  <!-- For Web -->
-  <!-- <base href="/"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Microservice Front</title>
+
   <!-- For Electron -->
-  <base href="./">
   <script>
+    if (typeof require != "undefined") {
+      // safe to use the function
       var electron = require('electron');
+    }
   </script>
   <!-- For Electron -->
 
@@ -17,19 +20,26 @@
   {{/unless}}
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="app.css" rel="stylesheet">
 </head>
 <body>
-  <app-root>Loading...</app-root>
 
-    {{#each scripts.polyfills}}
-    <script src="{{.}}"></script>
-    {{/each}}
-    <script>
-      System.import('system-config.js').then(function () {
-        System.import('main');
-      }).catch(console.error.bind(console));
-    </script>
+  <app-root></app-root>
 
+  <div class="loading">
+      <h1>Loading...</h1>
+  </div>
+
+  {{#each scripts.polyfills}}
+  <script src="{{.}}"></script>
+  {{/each}}
+  <script>
+    System.import('system-config.js').then(function () {
+      System.import('main');
+    }).catch(console.error.bind(console));
+  </script>
+
+  <!-- Enable bootstrap 4 theme -->
+   <script>window.__theme = 'bs4';</script>
 </body>
 </html>

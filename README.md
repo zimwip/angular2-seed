@@ -2,7 +2,13 @@
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.8.
 
+## Development notes
+To resolution system exists :
+- SystemJS for the browser, based on system-config.ts file
+- TypeScript import, based on tsconfig.json file et .d.ts files produced by typings command.
+
 ## Prerequisite
+install d3 typings `typings install d3 --save`
 install electron `npm i -g electron-prebuilt`
 
 ## Development server

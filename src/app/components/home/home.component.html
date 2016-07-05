@@ -1,0 +1,57 @@
+<!-- This fills the remaining space of the current row -->
+<div>
+<span>{{title}}</span>
+<span class="fill-space">{{acOn}}</span>
+<button (click)="formShowing=!formShowing" class="btn btn-primary">
+  toggle
+</button>
+</div>
+<div>
+  <a [routerLink]="['/heroes']">Heroes</a>
+</div>
+<div class="form" *ngIf="formShowing">
+  form
+</div>
+
+<div
+  (dragover)="false"
+  (dragend)="false"
+  (drop)="handleDrop($event)"
+  style="height: 300px; border: 5px dotted #ccc;">
+  <p style="margin: 10px; text-align: center">
+    <strong>Drop Your Images Here</strong>
+  </p>
+</div>
+
+<div class="media" *ngFor="let image of images">
+   <div class="media-left">
+     <a href="#">
+       <img class="media-object" src="file://{{ image.path }}" style="max-width:200px">
+     </a>
+   </div>
+   <div class="media-body">
+     <h4 class="media-heading">{{ image.name }}</h4>
+     <p>{{ image.size | byteFormat }} bytes</p>
+   </div>
+ </div>
+
+
+<div [ngClass]="{'demo': true, 'is-open' : formShowing}">
+  <div class="demo-wrapper">
+    <button id="application-menu-demo-toggle" class="js-container-target demo-toggle-button">Create an application menu
+      <div class="demo-meta u-avoid-clicks">Supports: Win, OS X, Linux <span class="demo-meta-divider">|</span> Process: Main</div>
+    </button>
+    <div class="demo-box">
+      <p>The <code>Menu</code> and <code>MenuItem</code> modules allow you to customize your application menu. If you don't set any menu, Electron will generate a minimal menu for your app by default.</p>
+    </div>
+  </div>
+</div>
+
+<ul>
+  <li *ngFor="let file of files | async">{{file}}</li>
+</ul>
+
+
+<div class="card-columns">
+  <manifestation-detail *ngFor="let item of items | async" [manifestation]="item" class="card"></manifestation-detail>
+</div>

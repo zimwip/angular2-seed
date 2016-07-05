@@ -7,36 +7,21 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
-  '@angular2-material': 'vendor/@angular2-material',
-  'moment': 'vendor/moment/moment.js'
+  'ng2-bootstrap' : 'vendor/ng2-bootstrap',
+  'moment': 'vendor/moment/moment.js',
+  'd3': 'vendor/d3/d3.min.js',
 };
 
 /** User packages configuration. */
-const materialPackages:string[] = [
-  'core',
-  'toolbar',
-  'icon',
-  'button',
-  'sidenav',
-  'list',
-  'card',
-  'input',
-  'radio',
-  'checkbox'
-];
+const packages: any = {
+  'ng2-bootstrap': {
+    format: 'cjs',
+    defaultExtension: 'js',
+    main: 'ng2-bootstrap.js'
+  }
+};
 
-const packages:any = createCustomConfig(materialPackages);
 
-function createCustomConfig(packages: string[]): any {
-  return packages.reduce((packageConfig: any, packageName: string) => {
-    packageConfig[`@angular2-material/${packageName}`] = {
-      format: 'cjs',
-      defaultExtension: 'js',
-      main: packageName
-    };
-    return packageConfig;
-  }, {});
-}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************************************
@@ -57,8 +42,16 @@ const barrels: string[] = [
 
   // App specific barrels.
   'app',
+  'app/model',
+  'app/services',
   'app/shared',
-  'app/open-data/manifestation/manifestation-detail',
+  'app/shared/main-menu',
+  'app/shared/top-menu',
+  'app/components',
+  'app/components/home',
+  'app/components/manifestation-detail',
+  'app/components/d3-area',
+  'app/components/dashboard',
   /** @cli-barrel */
 ];
 

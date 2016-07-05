@@ -1,27 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Control } from '@angular/common';
-import { Observable } from 'rxjs/Observable';
+import { Component, OnInit} from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { ROUTER_DIRECTIVES } from '@angular/router';
+import { CONFIG, TopMenuComponent, MainMenuComponent } from './shared';
+import { HomeComponent, DashboardComponent } from './components';
 
-import {MdToolbar} from '@angular2-material/toolbar';
-import {MdButton} from '@angular2-material/button';
-import {MD_SIDENAV_DIRECTIVES} from '@angular2-material/sidenav';
-import {MD_LIST_DIRECTIVES} from '@angular2-material/list';
-import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
-import {MdInput} from '@angular2-material/input';
-import {MdCheckbox} from '@angular2-material/checkbox';
-import {MdRadioButton, MdRadioGroup, MdRadioDispatcher} from '@angular2-material/radio';
-import {MdIcon, MdIconRegistry} from '@angular2-material/icon';
 
-import { SolrService  } from './solr.service';
-import { WikipediaService } from './wikipedia.service';
-import { ElectronService } from './electron.service';
-import { OpenDataService } from './open-data/open-data.service';
-import { Manifestation } from './open-data/manifestation/manifestation.model';
-import { ManifestationDetailComponent } from './open-data/manifestation/manifestation-detail/manifestation-detail.component';
-
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/switchMap';
 
 
 @Component({
@@ -30,83 +13,20 @@ import 'rxjs/add/operator/switchMap';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
   directives: [
-    MD_SIDENAV_DIRECTIVES,
-    MD_LIST_DIRECTIVES,
-    MD_CARD_DIRECTIVES,
-    MdToolbar,
-    MdButton,
-    MdInput,
-    MdCheckbox,
-    MdRadioGroup,
-    MdRadioButton,
-    MdIcon,
-    ManifestationDetailComponent
+    ROUTER_DIRECTIVES,
+    MainMenuComponent,
+    TopMenuComponent
   ],
-  providers: [MdIconRegistry,
-    MdRadioDispatcher,
-    SolrService,
-    WikipediaService,
-    OpenDataService,
-    ElectronService
-  ],
+  precompile: [HomeComponent, DashboardComponent]
 })
 export class AppComponent implements OnInit {
 
-  title = 'app works!';
-  formShowing: boolean = false;
+  constructor(private titleService: Title) { };
 
-  term = new Control();
-  files: Observable<Array<any>>;
+  ngOnInit() { };
 
-  items: Observable<Array<Manifestation>>;
-
-  views: Object[] = [
-    {
-      name: "My Account",
-      description: "Edit my account information",
-      icon: "assignment ind"
-    },
-    {
-      name: "Potential dates",
-      description: "Find your soulmate!",
-      icon: "pets"
-    }
-  ];
-
-  constructor(private solr : SolrService,
-    private wikipediaService: WikipediaService,
-    private openDataService: OpenDataService,
-    private electron : ElectronService) {
-    this.items = this.term.valueChanges
-         .debounceTime(400)
-         .distinctUntilChanged()
-         .switchMap(term => this.openDataService.search(term));
-    this.files = this.electron.listen('listDirSuccess');
-  };
-
-  ngOnInit()
-  {
-    console.log("init app");
-    //this.solr.getCustomers().subscribe(data => console.log(data));
-    this.electron.listen('on-ac').subscribe(
-                x => console.log("on-ac", x),
-                ex => console.log("OnError: {0}", ex.Message),
-                () => console.log("OnCompleted"));
-    this.electron.listen('on-battery').subscribe(
-                x => console.log("on-battery", x),
-                ex => console.log("OnError: {0}", ex.Message),
-                () => console.log("OnCompleted"));
-    this.electron.send('listDir', '.');
-  }
-
-  handleDrop(e) {
-   var files:File = e.dataTransfer.files;
-   Object.keys(files).forEach((key) => {
-     console.log(files[key]);
-   });
-
-   return false;
+  public setTitle( newTitle: string) {
+   this.titleService.setTitle( newTitle );
  }
-
 
 }

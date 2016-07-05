@@ -1,0 +1,12 @@
+<div id="main-menu">
+  <div class="menu-search">
+    <input type="text" placeholder="Search..." [ngFormControl]="search"/>
+  </div>
+  <div class="main-menu-container">
+    <div class="menu-content">
+      <div class="section" *ngFor= "let route of router.config | terminal">
+        <h3><a [routerLink]=route.path>{{route.path}}</a></h3>
+      </div>
+    </div>
+  </div>
+</div>

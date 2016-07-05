@@ -16,8 +16,20 @@ module.exports = function(defaults) {
       'reflect-metadata/**/*.+(ts|js|js.map)',
       'rxjs/**/*.+(js|js.map)',
       '@angular/**/*.+(js|js.map)',
-      '@angular2-material/**/*',
-      'moment/moment.js'
-    ]
+      'bootstrap/dist/**/*.+(js|js.map)',
+      'ng2-bootstrap/**/*.+(ts|js|js.map)',
+      'moment/moment.js',
+      'd3/d3.min.js',
+    ],
+    sassCompiler: {
+      cacheExclude: [/\/_[^\/]+$/],
+      includePaths: [ 'node_modules/bootstrap/scss' ]
+    },
+    minifyJS: {
+      enabled: false
+    },
+    minifyCSS: {
+      enabled: false
+    }
   });
 };
