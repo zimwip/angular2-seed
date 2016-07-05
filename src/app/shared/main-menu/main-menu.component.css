@@ -83,7 +83,7 @@
 }
 
 #main-menu .section h3 {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 300;
   color: #a4a4b0;
   text-transform: uppercase;
@@ -178,13 +178,8 @@
     height: calc(100% - 69px);
   }
 
-  .isOpenMenu #main-menu {
+  #main-menu.isOpenMenu  {
     left: 0;
-  }
-
-  #main {
-    width: 100%;
-    float: none;
   }
 }
 

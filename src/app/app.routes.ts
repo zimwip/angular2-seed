@@ -4,9 +4,9 @@ import { HeroesRoutes }        from './shared/';
 import { HomeComponent, DashboardComponent }       from './components/';
 
 export const routes : RouterConfig = [
-  { path: '',  redirectTo: '/home', terminal: true },
-  { path: 'home',  component: HomeComponent },
-  { path: 'd3',  component: DashboardComponent },
+  { path: '',  redirectTo: '/home', pathMatch : 'full' },
+  { path: 'home',  component: HomeComponent, data : {menu : true}},
+  { path: 'd3',  component: DashboardComponent, data : {menu : true} },
   ...HeroesRoutes
 ];
 

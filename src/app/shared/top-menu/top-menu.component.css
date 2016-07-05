@@ -144,6 +144,10 @@
     padding: 10px 10px;
   }
 
+  #mobile-main-menu {
+    display: inline-block;
+  }
+
 }
 
 @media (max-width: 600px) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Pipe, PipeTransform } from '@angular/core';
 import { Control } from '@angular/common';
 import { Router, ActivatedRoute, ROUTER_DIRECTIVES } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -10,12 +10,30 @@ import { OpenDataService } from '../../services';
 import { Manifestation } from '../../model';
 import { routes } from '../../';
 
+@Pipe({ name: 'terminal'})
+class TerminalPipe implements PipeTransform {
+  public transform(value:any):any {
+
+    const items:any = value;
+    const newItems:any = [];
+
+    items.forEach(function (item:any):void {
+      if (item.data != undefined && item.data.menu == true) {
+        newItems.push(item);
+      }
+    });
+
+    return newItems;
+  }
+}
+
 @Component({
   moduleId: module.id,
   selector: 'main-menu',
   templateUrl: 'main-menu.component.html',
   styleUrls: ['main-menu.component.css'],
-  directives : [ROUTER_DIRECTIVES]
+  directives : [ROUTER_DIRECTIVES],
+  pipes: [TerminalPipe]
 })
 export class MainMenuComponent implements OnInit, OnDestroy {
 

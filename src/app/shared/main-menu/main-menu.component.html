@@ -4,17 +4,8 @@
   </div>
   <div class="main-menu-container">
     <div class="menu-content">
-      <div class="section">
-        <h3>test section</h3>
-      </div>
-      <div class="section">
-        <h3><a [routerLink]="['/']">Home</a></h3>
-      </div>
-      <div class="section">
-        <h3><a [routerLink]="['/d3']">D3</a></h3>
-      </div>
-      <div class="section" *ngFor= "let route of routes">
-        <h3><a [routerLink]="['/d3']">D3</a></h3>
+      <div class="section" *ngFor= "let route of router.config | terminal">
+        <h3><a [routerLink]=route.path>{{route.path}}</a></h3>
       </div>
     </div>
   </div>
