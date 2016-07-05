@@ -40,7 +40,7 @@
 
 #main-menu .menu-search:before {
   content: "";
-  background: url("app/assets/images/search-doc.png") no-repeat 50% 50%;
+  background: url("images/search-doc.png") no-repeat 50% 50%;
   background-size: contain;
   width: 16px;
   height: 16px;
@@ -67,7 +67,7 @@
   display: block;
   width: 11px;
   height: 12px;
-  background: url("../images/repa-down.png") no-repeat bottom left;
+  background: url("images/repa-down.png") no-repeat bottom left;
   background-size: contain !important;
   position: absolute;
   top: calc(50% - 6px);
@@ -75,7 +75,7 @@
 }
 
 #main-menu .section .item.active h4 .arrow {
-  background: url("../images/repa-up.png") no-repeat top left;
+  background: url("images/repa-up.png") no-repeat top left;
 }
 
 #main-menu .menu-content {
@@ -144,7 +144,7 @@
   display: block;
   margin: 5px 0 -5px;
   padding: 0 0 0 5px;
-  background: url("../images/border-dot.png") repeat-y 5px 0;
+  background: url("images/border-dot.png") repeat-y 5px 0;
 }
 
 #main-menu .section .item li {
