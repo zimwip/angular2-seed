@@ -36,9 +36,9 @@ export class TopMenuComponent implements OnInit, OnDestroy {
   public toggle(isShown?:boolean):void {
     this.isShown = typeof isShown === 'undefined' ? !this.isShown : isShown;
     if (this.document && this.document.body) {
-      this.renderer.setElementClass(this.document.getElementById('main-menu'), 'isOpenMenu', this.isShown);
+      this.renderer.setElementClass(this.document.body, 'isOpenMenu', this.isShown);
       if (this.isShown === false) {
-        this.renderer.setElementProperty(this.document.getElementById('main-menu'), 'scrollTop', 0);
+        this.renderer.setElementProperty(this.document.body, 'scrollTop', 0);
       }
     }
   }

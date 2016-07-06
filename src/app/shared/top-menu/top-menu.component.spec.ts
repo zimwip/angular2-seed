@@ -12,9 +12,11 @@ import {
 
 import { TopMenuComponent } from './top-menu.component';
 
+beforeEachProviders(() => [TopMenuComponent]);
+
 describe('Component: TopMenu', () => {
-  it('should create an instance', () => {
-    let component = new TopMenuComponent();
+  it('should create an instance',
+      inject([TopMenuComponent], (component: TopMenuComponent) => {
     expect(component).toBeTruthy();
-  });
+  }));
 });
