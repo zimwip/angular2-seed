@@ -37,7 +37,7 @@ class TerminalPipe implements PipeTransform {
 })
 export class MainMenuComponent implements OnInit, OnDestroy {
 
-  search = new Control();
+  search : string;
   results :  Observable<Array<Manifestation>>;
   private sub: any;
 
@@ -45,14 +45,14 @@ export class MainMenuComponent implements OnInit, OnDestroy {
               private router: Router,
               private openDataService: OpenDataService) {
     // bind search to query service.
-    this.search.valueChanges
-         .debounceTime(400)
-         .distinctUntilChanged()
-         .subscribe(
-                     term => this.openDataService.search(term),
-                     ex => console.log("OnError: {0}", ex.Message),
-                     () => console.log("OnCompleted"));
-
+    //this.search.valueChanges
+    //     .debounceTime(400)
+    //     .distinctUntilChanged()
+    //     .subscribe(
+    //                 term => this.openDataService.search(term),
+    //                 ex => console.log("OnError: {0}", ex.Message),
+    //                 () => console.log("OnCompleted"));
+//
   }
 
   ngOnInit() {

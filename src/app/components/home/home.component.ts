@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Pipe, PipeTransform, forwardRef  } from '@angular/core';
 import { Control } from '@angular/common';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+import { ROUTER_DIRECTIVES, CanActivate} from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -8,7 +8,8 @@ import 'rxjs/add/operator/switchMap';
 
 import { BUTTON_DIRECTIVES  } from 'ng2-bootstrap';
 
-import { SolrService,
+import { Authentication,
+         SolrService,
          WikipediaService,
          ElectronService,
          OpenDataService } from '../../services';

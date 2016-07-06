@@ -34,6 +34,7 @@ const barrels: string[] = [
   '@angular/compiler',
   '@angular/http',
   '@angular/router',
+  '@angular/forms',
   '@angular/platform-browser',
   '@angular/platform-browser-dynamic',
 
@@ -52,6 +53,7 @@ const barrels: string[] = [
   'app/components/manifestation-detail',
   'app/components/d3-area',
   'app/components/dashboard',
+  'app/components/login',
   /** @cli-barrel */
 ];
 
