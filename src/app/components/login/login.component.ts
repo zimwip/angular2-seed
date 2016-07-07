@@ -13,13 +13,14 @@ export class LoginComponent implements OnInit {
 
   username : string;
   password : string;
+  error : string;
   constructor(public auth: Authentication, public router: Router) {
 
   }
 
   onSubmit() {
     this.auth.login(this.username, this.password)
-      .subscribe( (token: any) => this.router.navigate(['/home']));
+      .subscribe( (token: boolean) => {if (token) {this.router.navigate(['/home']);} else {this.error = 'Unknown User';this.router.navigate(['/login'])}});
   }
 
   ngOnInit() {

@@ -42,8 +42,7 @@ export class Authentication {
       console.log(this.token, JSON.stringify(this.token));
       return Observable.of(true);
     }
-
-    return Observable.throw('authentication failure');
+    return Observable.of(false);
   }
 
   logout() : Observable<boolean> {

@@ -1,5 +1,7 @@
 @import "custom";
 @import "bootstrap";
+$fa-font-path:        "vendor/font-awesome/fonts";
+@import "font-awesome";
 
 // could be decline by 80% 60% 40% 20%
 $cap-yellow : #fecc26;
