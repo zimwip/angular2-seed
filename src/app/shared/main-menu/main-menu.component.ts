@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Pipe, PipeTransform } from '@angular/core';
-import { Control } from '@angular/common';
+import { REACTIVE_FORM_DIRECTIVES, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute, ROUTER_DIRECTIVES } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
@@ -32,12 +32,12 @@ class TerminalPipe implements PipeTransform {
   selector: 'main-menu',
   templateUrl: 'main-menu.component.html',
   styleUrls: ['main-menu.component.css'],
-  directives : [ROUTER_DIRECTIVES],
+  directives : [ROUTER_DIRECTIVES, REACTIVE_FORM_DIRECTIVES],
   pipes: [TerminalPipe]
 })
 export class MainMenuComponent implements OnInit, OnDestroy {
 
-  search : string;
+  search = new FormControl();
   results :  Observable<Array<Manifestation>>;
   private sub: any;
 
@@ -45,14 +45,14 @@ export class MainMenuComponent implements OnInit, OnDestroy {
               private router: Router,
               private openDataService: OpenDataService) {
     // bind search to query service.
-    //this.search.valueChanges
-    //     .debounceTime(400)
-    //     .distinctUntilChanged()
-    //     .subscribe(
-    //                 term => this.openDataService.search(term),
-    //                 ex => console.log("OnError: {0}", ex.Message),
-    //                 () => console.log("OnCompleted"));
-//
+    this.search.valueChanges
+         .debounceTime(400)
+         .distinctUntilChanged()
+         .subscribe(
+                     term => this.openDataService.search(term),
+                     ex => console.log("OnError: {0}", ex.Message),
+                     () => console.log("OnCompleted"));
+
   }
 
   ngOnInit() {

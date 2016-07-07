@@ -5,14 +5,15 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/share';
 
+import * as Moment from 'moment';
+
 @Injectable()
 export class Authentication {
 
-  token: string;
+  private tokenName : string = 'authent-token';
+  token: any = undefined;
 
-  constructor(private http: Http) {
-    this.token = localStorage.getItem('token');
-  }
+  constructor(private http: Http) {}
 
   login(username: string, password: string) :  Observable<boolean> {
     /*
@@ -36,8 +37,9 @@ export class Authentication {
     */
 
     if (username === 'test' && password === 'test') {
-      this.token = 'token';
-      localStorage.setItem('token', this.token);
+      this.token = { name : username, date : Moment()};
+      localStorage.setItem(this.tokenName, JSON.stringify(this.token));
+      console.log(this.token, JSON.stringify(this.token));
       return Observable.of(true);
     }
 
@@ -65,7 +67,34 @@ export class Authentication {
     return Observable.of(true);
   }
 
-  isLoggedIn() {
-    return !!localStorage.getItem('token');
+  isLoggedIn() : boolean {
+    if (typeof this.token == 'undefined')
+    {
+      let tokenString = localStorage.getItem(this.tokenName);
+      if (typeof tokenString == 'string')
+      {
+        try {
+          this.token = JSON.parse(tokenString);
+          console.log(this.token);
+        }
+        catch (e){
+          return false;
+        }
+      }
+    }
+    if (typeof this.token == 'undefined')
+    {
+      return false;
+    }
+    let now = Moment();
+    let tokenDate = Moment(this.token.date);
+    if (tokenDate.add(30,'seconds').isAfter(now))
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
   }
 }
