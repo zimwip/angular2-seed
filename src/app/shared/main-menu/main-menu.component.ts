@@ -39,6 +39,12 @@ export class MainMenuComponent implements OnInit, OnDestroy {
 
   search = new FormControl();
   results :  Observable<Array<Manifestation>>;
+  sections : any = [
+    {key : 'main', label : "Main Navigation"},
+    {key : 'label', label : "label"},
+
+  ];
+
   private sub: any;
 
   constructor(private route: ActivatedRoute,

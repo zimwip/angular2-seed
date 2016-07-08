@@ -1,4 +1,81 @@
 // Variables
+
+//COLORS
+//--------------------------------------------------------
+//Primary
+$light-blue: #3c8dbc;
+//Danger
+$red: #dd4b39;
+//Success
+$green: #00a65a;
+//Info
+$aqua: #00c0ef;
+//Warning
+$yellow: #f39c12;
+$blue: #0073b7;
+$navy: #001F3F;
+$teal: #39CCCC;
+$olive: #3D9970;
+$lime: #01FF70;
+$orange: #FF851B;
+$fuchsia: #F012BE;
+$purple: #605ca8;
+$maroon: #D81B60;
+$black: #111;
+$gray: #d2d6de;
+// could be decline by 80% 60% 40% 20%
+$cap-yellow : #fecc26;
+$cap-orange : #ed771a;
+$cap-red : #b70132;
+$cap-pink : #ba0065;
+$cap-purple : #691e7c;
+$cap-dark-blue : #00264a;
+$cap-blue : #0098cc;
+$cap-dark-green : #598e20;
+$cap-green : #bdbd00;
+$cap-light-gray : #9f958f;
+$cap-light-blue : #b3c1c2;
+$cap-light-green : #a4c7c0;
+$cap-metal : #b1b3b4;
+
+$top-color : darken($cap-dark-blue, 5%);
+
+$main-color1 : #283E51;
+$main-color2 : #4B79A1;
+
+
+//LAYOUT
+//--------------------------------------------------------
+
+//Side bar and logo width
+$sidebar-width: 230px;
+
+//SIDEBAR SKINS
+//--------------------------------------------------------
+
+//Dark sidebar
+$sidebar-dark-bg: #222d32;
+$sidebar-dark-hover-bg: darken($sidebar-dark-bg, 2%);
+$sidebar-dark-color: lighten($sidebar-dark-bg, 60%);
+$sidebar-dark-hover-color: #fff;
+$sidebar-dark-submenu-bg: lighten($sidebar-dark-bg, 5%);
+$sidebar-dark-submenu-color: lighten($sidebar-dark-submenu-bg, 40%);
+$sidebar-dark-submenu-hover-color: #fff;
+
+//Light sidebar
+$sidebar-light-bg: #f9fafc;
+$sidebar-light-hover-bg: lighten(#f0f0f1, 1.5%);
+$sidebar-light-color: #444;
+$sidebar-light-hover-color: #000;
+$sidebar-light-submenu-bg: $sidebar-light-hover-bg;
+$sidebar-light-submenu-color: #777;
+$sidebar-light-submenu-hover-color: #000;
+
+//CONTROL SIDEBAR
+//--------------------------------------------------------
+$control-sidebar-width: $sidebar-width;
+
+
 //
 // Copy settings from this file into the provided `_custom.scss` to override
 // the Bootstrap defaults without modifying key, versioned files.

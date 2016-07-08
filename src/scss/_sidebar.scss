@@ -1,0 +1,346 @@
+/*
+ * Component: Sidebar
+ * ------------------
+ */
+@import "../custom";
+@import "./mixins";
+@import "mixins/breakpoints";
+//Main Sidebar
+// ``` .left-side has been deprecated as of 2.0.0 in favor of .main-sidebar ```
+
+/************* START MAIN MENU **************/
+
+#main-menu {
+  width: 270px;
+  height: calc(100% - 68px);
+  float: left;
+  background-color: $main-color1;
+  margin-top: 65px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  -webkit-transition: left .5s ease;
+  -moz-transition: left .5s ease;
+  -ms-transition: left .5s ease;
+  -o-transition: left .5s ease;
+  transition: left .5s ease;
+}
+
+#main-menu.active {
+  left: 0;
+}
+
+#main-menu > div {
+  border-top: 1px solid lighten($main-color1, 5%);
+}
+
+#main-menu .menu-search {
+  position: relative;
+  padding: 10px;
+}
+
+#main-menu .menu-search input {
+  border: 1px solid #babfc4;
+  font-size: 14px;
+  color: #a4a4b0;
+  padding-left: 30px;
+}
+
+#main-menu .menu-search:before {
+  content: "";
+  background: url("images/search-doc.png") no-repeat 50% 50%;
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 19px;
+  left: 17px;
+}
+
+#main-menu .menu-search input:focus,
+#main-menu .menu-search input:active {
+  outline: 0;
+}
+
+#main-menu .main-menu-container {
+  overflow-y: auto;
+  height: calc(100% - 56px);
+}
+
+#main-menu .section .item h4 {
+  position: relative;
+}
+
+#main-menu .section .item h4 .arrow {
+  display: block;
+  width: 11px;
+  height: 12px;
+  background: url("images/repa-down.png") no-repeat bottom left;
+  background-size: contain !important;
+  position: absolute;
+  top: calc(50% - 6px);
+  right: 0;
+}
+
+#main-menu .section .item.active h4 .arrow {
+  background: url("images/repa-up.png") no-repeat top left;
+}
+
+#main-menu .menu-content {
+  padding: 0 15px 0 10px;
+}
+
+#main-menu .section h3 {
+  font-size: 16px;
+  font-weight: 300;
+  color: #a4a4b0;
+  text-transform: uppercase;
+  margin: 15px 0;
+  cursor: pointer;
+
+  -webkit-transition: all .2s ease-out;
+  -moz-transition: all .2s ease-out;
+  -o-transition: all .2s ease-out;
+  transition: all .2s ease-out;
+}
+
+#main-menu .section h3:hover,
+#main-menu .section.active h3 {
+  color: #fff;
+}
+
+#main-menu .section .item {
+  margin-bottom: 13px;
+  margin-left: 15px;
+  display: none;
+}
+
+#main-menu .section:first-child .item {
+  display: none !important;
+}
+
+#main-menu .section.active .item {
+  display: block;
+}
+
+#main-menu .section h4 {
+  color: #a4a4b0;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 300;
+  -webkit-transition: all .2s ease-out;
+  -moz-transition: all .2s ease-out;
+  -o-transition: all .2s ease-out;
+  transition: all .2s ease-out;
+}
+
+#main-menu .section h4:hover {
+  color: #fff;
+}
+
+#main-menu .section .item h4 .arrow {
+  width: 8px;
+  height: 9px;
+  top: calc(50% - 5px);
+}
+
+#main-menu .section ul {
+  display: none;
+}
+
+#main-menu .section .item.active ul {
+  display: block;
+  margin: 5px 0 -5px;
+  padding: 0 0 0 5px;
+  background: url("images/border-dot.png") repeat-y 5px 0;
+}
+
+#main-menu .section .item li {
+  color: #a4a4b0;
+  font-size: 14px;
+  padding: 0 0 0 12px;
+  margin: 14px 0;
+  /*font-family: 'Source Code Pro';*/
+  border-left: 1px solid transparent;
+  list-style: none;
+}
+
+#main-menu .section .item li.active,
+#main-menu .section .item li:hover {
+  color: #cd151e;
+  border-left: 1px solid #cd151e;
+}
+
+#main-menu .section .item li:not(.active):hover {
+  cursor: pointer;
+}
+
+/************* END MAIN MENU **************/
+
+.main-sidebar,
+{
+  width: $sidebar-width;
+  height: calc(100% - 68px);
+  float: left;
+  background-color: $main-color1;
+  margin-top: 65px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 810;
+  //Using disposable variable to join statements with a comma
+  @include transition(0.3s ease-in-out, width 0.3s ease-in-out);
+
+  @include media-breakpoint-up(sm) {
+    padding-top: 68px;
+  }
+
+  @include media-breakpoint-down(xs) {
+      @include translate(-$sidebar-width, 0);
+  }
+
+  .sidebar-collapse & {
+      @include media-breakpoint-up(sm) {
+      @include translate(-$sidebar-width, 0);
+    }
+  }
+  .sidebar-open & {
+    @include media-breakpoint-down(xs) {
+      @include translate(0, 0);
+    }
+  }
+}
+
+.sidebar {
+  padding-bottom: 10px;
+}
+
+// remove border from form
+.sidebar-form {
+  input:focus {
+    border-color: transparent;
+  }
+}
+
+//Sidebar user panel
+.user-panel {
+  position: relative;
+  width: 100%;
+  padding: 10px;
+  overflow: hidden;
+  :before,
+  :after {
+    content: " ";
+    display: table;
+  }
+  :after {
+    clear: both;
+  }
+  > .image > img {
+    width: 100%;
+    max-width: 45px;
+    height: auto;
+  }
+  > .info {
+    padding: 5px 5px 5px 15px;
+    line-height: 1;
+    position: absolute;
+    left: 55px;
+    > p {
+      font-weight: 600;
+      margin-bottom: 9px;
+    }
+    > a {
+      text-decoration: none;
+      padding-right: 5px;
+      margin-top: 3px;
+      font-size: 11px;
+      > .fa,
+      > .ion,
+      > .glyphicon {
+        margin-right: 3px;
+      }
+    }
+  }
+}
+
+// Sidebar menu
+.sidebar-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: calc(100% - 56px);
+  overflow-y: auto;
+  //First Level
+  > li {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    > a {
+      padding: 12px 5px 12px 15px;
+      display: block;
+      > .fa,
+      > .glyphicon,
+      > .ion {
+        width: 20px;
+      }
+    }
+    .label,
+    .badge {
+      margin-right: 5px;
+    }
+    .badge {
+      margin-top: 3px;
+    }
+  }
+  li.header {
+    padding: 10px 25px 10px 15px;
+    font-size: 12px;
+  }
+  li > a > .pull-right-container > .fa-angle-left {
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin-right: 10px;
+  }
+  li.active {
+    > a > .pull-right-container > .fa-angle-left {
+      @include rotate(-90deg);
+    }
+    > .treeview-menu {
+      display: block;
+    }
+  }
+
+  // Tree view menu
+  .treeview-menu {
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    padding-left: 5px;
+    .treeview-menu {
+      padding-left: 20px;
+    }
+    > li {
+      margin: 0;
+      > a {
+        padding: 5px 5px 5px 15px;
+        display: block;
+        font-size: 14px;
+        > .fa,
+        > .glyphicon,
+        > .ion {
+          width: 20px;
+        }
+        > .pull-right-container > .fa-angle-left,
+        > .fa-angle-down {
+          width: auto;
+        }
+      }
+    }
+  }
+}
+
+@include skin-dark-sidebar($cap-metal);
