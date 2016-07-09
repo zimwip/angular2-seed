@@ -7,8 +7,9 @@ import { AuthGuard }       from './services';
 export const routes : RouterConfig = [
   { path: '', redirectTo: '/login', pathMatch : 'full'},
   { path: 'login',  component: LoginComponent },
-  { path: 'home',  component: HomeComponent, data : {menu : true}, canActivate: [AuthGuard]},
-  { path: 'd3',  component: DashboardComponent, data : {menu : true} },
+  { path: 'home',  component: HomeComponent, data : {menu : true, section : 'main',  label : 'Home'}, canActivate: [AuthGuard]},
+  { path: 'dashboard',  component: DashboardComponent, data : {menu : true, section : 'main', label : 'Dashboard'} },
+  { path: 'home2',  component: HomeComponent, data : {menu : true, section : 'label',  label : 'Home 2'}, canActivate: [AuthGuard]},
   ...HeroesRoutes
 ];
 

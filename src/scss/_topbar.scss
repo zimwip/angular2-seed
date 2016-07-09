@@ -1,0 +1,96 @@
+@import "../custom";
+@import "./mixins";
+@import "mixins/breakpoints";
+
+/************* START TOP MENU **************/
+
+.top-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: $main-color1;
+  background: $main-color1; /* fallback for old browsers */
+  background: linear-gradient(to right, $main-color1 0%, $main-color1 $sidebar-width, $main-color2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  z-index: 1000;
+
+  > div:not(.logo) {
+    float: left;
+  }
+
+  .logo {
+    float: right;
+    margin: 7px 25px 11px 0;
+    > div {
+      float: left;
+    }
+    img {
+      height: 50px;
+    }
+  }
+
+  .title {
+    min-width: $sidebar-width;
+    h2 {
+      font-size: 22px;
+      padding: 22px 10px;
+      font-weight: 500;
+      color: #fff;
+      margin: 0;
+    }
+  }
+
+  .mobile-main-menu {
+    display: none;
+    cursor: pointer;
+    padding: 22px 15px;
+    img {
+      height: 16px;
+    }
+  }
+
+  @include media-breakpoint-down(lg) {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+
+    .mobile-main-menu {
+      order: 0;
+      display: inline-block;
+    }
+
+    .title {
+      order: 1;
+      width: calc(100% - 95px);
+      text-align: center;
+      min-width: 1px;
+    }
+
+    .logo {
+      order: 2;
+    }
+
+  }
+
+  @include media-breakpoint-down(sm) {
+
+    .title h2 {
+      padding: 18px 15px;
+    }
+
+    .mobile-main-menu {
+      padding: 17px 15px;
+    }
+
+    .logo {
+      margin: 2px 15px;
+    }
+
+  }
+}
+
+
+
+
+
+/************* END TOP MENU **************/

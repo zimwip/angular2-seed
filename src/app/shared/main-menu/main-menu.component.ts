@@ -6,19 +6,18 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 
-import { OpenDataService } from '../../services';
-import { Manifestation } from '../../model';
+import { OpenDataService, Authentication } from '../../services';
 import { routes } from '../../';
 
 @Pipe({ name: 'terminal'})
 class TerminalPipe implements PipeTransform {
-  public transform(value:any):any {
+  public transform(value:Array<any>, section:string):Array<any> {
 
-    const items:any = value;
-    const newItems:any = [];
+    const items:Array<any> = value;
+    const newItems:Array<any> = [];
 
     items.forEach(function (item:any):void {
-      if (item.data != undefined && item.data.menu == true) {
+      if (item.data != undefined && item.data.menu == true && item.data.section == section) {
         newItems.push(item);
       }
     });
@@ -38,10 +37,10 @@ class TerminalPipe implements PipeTransform {
 export class MainMenuComponent implements OnInit, OnDestroy {
 
   search = new FormControl();
-  results :  Observable<Array<Manifestation>>;
+  currentRoute :any ;
   sections : any = [
     {key : 'main', label : "Main Navigation"},
-    {key : 'label', label : "label"},
+    {key : 'label', label : "Label"},
 
   ];
 
@@ -49,6 +48,7 @@ export class MainMenuComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
+              private authent: Authentication,
               private openDataService: OpenDataService) {
     // bind search to query service.
     this.search.valueChanges
@@ -62,17 +62,23 @@ export class MainMenuComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // bind results to update facet.
-    this.results = this.openDataService.listen();
     // router analysis
-    this.sub = this.route.params.subscribe(params => {
-     let id = +params['id']; // (+) converts string 'id' to a number
-    // this.service.getHero(id).then(hero => this.hero = hero);
-   });
+    this.sub = this.route.data.subscribe(data => {
+     this.currentRoute = data; // (+) converts string 'id' to a number
+     // this.service.getHero(id).then(hero => this.hero = hero);
+    });
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  isLoggedIn():boolean {
+    return this.authent.isLoggedIn();
+  }
+
+  logout():void {
+    this.authent.logout();
   }
 
 }
