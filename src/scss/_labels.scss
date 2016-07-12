@@ -1,0 +1,30 @@
+/*
+ * Component: Label
+ * ----------------
+ */
+@import "../custom";
+
+.label-default {
+  background-color: $gray;
+  color: #444;
+}
+
+.label-danger {
+  @extend .label-default, .bg-red;
+}
+
+.label-info {
+  @extend .label-default, .bg-aqua;
+}
+
+.label-warning {
+  @extend .label-default, .bg-yellow;
+}
+
+.label-primary {
+  @extend .label-default, .bg-light-blue;
+}
+
+.label-success {
+  @extend .label-default, .bg-green;
+}

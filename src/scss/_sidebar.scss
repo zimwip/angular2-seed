@@ -14,7 +14,7 @@
 {
   width: $sidebar-width;
   min-height: 100%;
-  margin-top: 68px;
+  padding-top: $navbar-height;
   background-color: $main-color1;
   position: absolute;;
   top: 0;
@@ -22,18 +22,21 @@
   z-index: 810;
 
   //Using disposable variable to join statements with a comma
-  @include transition(left 0.3s ease-in-out);
-
-  @include media-breakpoint-down(lg) {
-    left: -100%;
-    .isOpenMenu & {
-      left: 0;
-    }
-  }
+  @include transition(transform $transition-speed $transition-fn);
 
   @include media-breakpoint-down(sm) {
-//    height: calc(100% - 58px);
-    margin-top: 58px;
+    padding-top: 2*$navbar-height;
+    @include translate(-$sidebar-width, 0);
+  }
+  .sidebar-collapse & {
+    @include media-breakpoint-up(sm) {
+      @include translate(-$sidebar-width, 0);
+    }
+  }
+  .sidebar-open & {
+    @include media-breakpoint-down(sm) {
+      @include translate(0, 0);
+    }
   }
 }
 
@@ -159,7 +162,5 @@
     }
   }
 }
-
-@include skin-dark-sidebar($cap-metal);
 
 /************* END MAIN MENU **************/

@@ -1,10 +1,16 @@
 
 @import "custom";
 @import "bootstrap";
-$fa-font-path:   "vendor/font-awesome/fonts";
+$fa-font-path:  "vendor/font-awesome/fonts";
 @import "font-awesome";
 
 @import "scss/load";
 @import "scss/core";
-@import "scss/topbar";
+@import "scss/miscellaneous";
+@import "scss/forms";
+@import "scss/labels";
+@import "scss/header";
+@import "scss/navs";
+@import "scss/dropdowns";
 @import "scss/sidebar";
+@import "scss/skins/skin-blue";

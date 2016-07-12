@@ -1,5 +1,31 @@
 // Variables
 
+// could be decline by 80% 60% 40% 20%
+$cap-yellow : #fecc26;
+$cap-orange : #ed771a;
+$cap-red : #b70132;
+$cap-pink : #ba0065;
+$cap-purple : #691e7c;
+$cap-dark-blue : #00264a;
+$cap-blue : #0098cc;
+$cap-dark-green : #598e20;
+$cap-green : #bdbd00;
+$cap-light-gray : #9f958f;
+$cap-light-blue : #b3c1c2;
+$cap-light-green : #a4c7c0;
+$cap-metal : #b1b3b4;
+
+$main-color1 : #283E51;
+$main-color2 : #4B79A1;
+
+
+//PATHS
+//--------------------------------------------------------
+
+$boxed-layout-bg-image-path: "images/boxed-bg.jpg";
+
+//COLORS
+//--------------------------------------------------------
 //COLORS
 //--------------------------------------------------------
 //Primary
@@ -23,32 +49,21 @@ $purple: #605ca8;
 $maroon: #D81B60;
 $black: #111;
 $gray: #d2d6de;
-// could be decline by 80% 60% 40% 20%
-$cap-yellow : #fecc26;
-$cap-orange : #ed771a;
-$cap-red : #b70132;
-$cap-pink : #ba0065;
-$cap-purple : #691e7c;
-$cap-dark-blue : #00264a;
-$cap-blue : #0098cc;
-$cap-dark-green : #598e20;
-$cap-green : #bdbd00;
-$cap-light-gray : #9f958f;
-$cap-light-blue : #b3c1c2;
-$cap-light-green : #a4c7c0;
-$cap-metal : #b1b3b4;
-
-$top-color : darken($cap-dark-blue, 5%);
-
-$main-color1 : #283E51;
-$main-color2 : #4B79A1;
-
 
 //LAYOUT
 //--------------------------------------------------------
 
 //Side bar and logo width
 $sidebar-width: 230px;
+//Boxed layout maximum width
+$boxed-layout-max-width: 1024px;
+
+//Link colors (Aka: <a> tags)
+$link-color: $light-blue;
+$link-hover-color: lighten($link-color, 15%);
+
+//Body background (Affects main content background only)
+$body-bg: #ecf0f5;
 
 //SIDEBAR SKINS
 //--------------------------------------------------------
@@ -62,9 +77,71 @@ $sidebar-dark-submenu-bg: lighten($sidebar-dark-bg, 5%);
 $sidebar-dark-submenu-color: lighten($sidebar-dark-submenu-bg, 40%);
 $sidebar-dark-submenu-hover-color: #fff;
 
+//Light sidebar
+$sidebar-light-bg: #f9fafc;
+$sidebar-light-hover-bg: lighten(#f0f0f1, 1.5%);
+$sidebar-light-color: #444;
+$sidebar-light-hover-color: #000;
+$sidebar-light-submenu-bg: $sidebar-light-hover-bg;
+$sidebar-light-submenu-color: #777;
+$sidebar-light-submenu-hover-color: #000;
+
+//NAVBAR
+//--------------------------------------------------------
+$navbar-height: 50px;
+
 //CONTROL SIDEBAR
 //--------------------------------------------------------
 $control-sidebar-width: $sidebar-width;
+
+//BOXES
+//--------------------------------------------------------
+$box-border-color: #f4f4f4;
+$box-border-radius: 3px;
+$box-footer-bg: #fff;
+$box-boxshadow: 0 1px 1px rgba(0, 0, 0, .1);
+$box-padding: 10px;
+
+//Box variants
+$box-default-border-top-color: #d2d6de;
+
+//BUTTONS
+//--------------------------------------------------------
+$btn-boxshadow: none;
+
+//PROGRESS BARS
+//--------------------------------------------------------
+$progress-bar-border-radius: 1px;
+$progress-bar-sm-border-radius: 1px;
+$progress-bar-xs-border-radius: 1px;
+
+//FORMS
+//--------------------------------------------------------
+$input-radius: 0;
+
+//BUTTONS
+//--------------------------------------------------------
+
+//Border radius for non flat buttons
+$btn-border-radius: 3px;
+
+//DIRECT CHAT
+//--------------------------------------------------------
+$direct-chat-height: 250px;
+$direct-chat-default-msg-bg: $gray;
+$direct-chat-default-font-color: #444;
+$direct-chat-default-msg-border-color: $gray;
+
+//CHAT WIDGET
+//--------------------------------------------------------
+$attachment-border-radius: 3px;
+
+//TRANSITIONS SETTINGS
+//--------------------------------------------------------
+
+//Transition global options
+$transition-speed: .3s;
+$transition-fn: ease-in-out;
 
 
 //

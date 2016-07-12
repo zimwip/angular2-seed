@@ -1,13 +1,14 @@
 import { Component, Renderer, Inject, OnInit, OnDestroy } from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, NavigationEnd } from '@angular/router';
-import {DOCUMENT} from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/platform-browser';
+import { DROPDOWN_DIRECTIVES } from 'ng2-bootstrap';
 
 @Component({
   moduleId: module.id,
   selector: 'top-menu',
   templateUrl: 'top-menu.component.html',
   styleUrls: ['top-menu.component.css'],
-  directives: [ ROUTER_DIRECTIVES]
+  directives: [ ROUTER_DIRECTIVES, DROPDOWN_DIRECTIVES ]
 })
 export class TopMenuComponent implements OnInit, OnDestroy {
 
@@ -36,7 +37,7 @@ export class TopMenuComponent implements OnInit, OnDestroy {
   public toggle(isShown?:boolean):void {
     this.isShown = typeof isShown === 'undefined' ? !this.isShown : isShown;
     if (this.document && this.document.body) {
-      this.renderer.setElementClass(this.document.body, 'isOpenMenu', this.isShown);
+      this.renderer.setElementClass(this.document.body, 'sidebar-open', this.isShown);
       if (this.isShown === false) {
         this.renderer.setElementProperty(this.document.body, 'scrollTop', 0);
       }
