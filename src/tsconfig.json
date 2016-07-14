@@ -16,7 +16,7 @@
     "inlineSources": true
   },
   "files": [
-    "main.ts",
+    "main.browser.ts",
     "typings.d.ts"
   ]
 }

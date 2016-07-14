@@ -1,6 +1,6 @@
 @import "../custom";
 @import "./mixins";
-@import "mixins/breakpoints";
+
 
 html,
 body {
@@ -48,13 +48,14 @@ body {
 .content-wrapper,
 .main-footer {
   //Using disposable variable to join statements with a comma
-  @include transform(transform $transition-speed $transition-fn);
   margin-left: $sidebar-width;
   z-index: 820;
+  @include transition(transform $transition-speed $transition-fn);
   //Top nav layout
   .layout-top-nav & {
     margin-left: 0;
   }
+
   @include media-breakpoint-down(sm) {
     margin-left: 0;
   }

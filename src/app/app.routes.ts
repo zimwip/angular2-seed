@@ -1,7 +1,7 @@
 import { provideRouter, RouterConfig }       from '@angular/router';
 
 import { HeroesRoutes }        from './shared/';
-import { LoginComponent, HomeComponent, DashboardComponent }       from './components';
+import { LoginComponent, HomeComponent, DashboardComponent }  from './components';
 import { AuthGuard }       from './services';
 
 export const routes : RouterConfig = [

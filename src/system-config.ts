@@ -42,6 +42,7 @@ const barrels: string[] = [
   'rxjs',
 
   // App specific barrels.
+  'platform/browser',
   'app',
   'app/model',
   'app/services',
@@ -70,7 +71,7 @@ System.config({
   map: {
     '@angular': 'vendor/@angular',
     'rxjs': 'vendor/rxjs',
-    'main': 'main.js'
+    'main.browser': 'main.browser.js'
   },
   packages: cliSystemConfigPackages
 });
