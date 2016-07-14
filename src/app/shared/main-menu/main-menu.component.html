@@ -26,12 +26,12 @@
     <div>
       <ul class="sidebar-menu" *ngFor= "let section of sections">
         <li class="header">{{section.label}}</li>
-        <li class="treeview" *ngFor= "let route of router.config | terminal:section.key">
+        <li class="treeview" *ngFor= "let route of router.config | section:section.key">
             <a [routerLink]=route.path>
               <i class="fa fa-dashboard"></i> <span>{{route.path}}</span>
             </a>
             <ul class="treeview-menu" *ngIf=route.children>
-              <li *ngFor= "let sub-route of route.children | terminal:section.key">
+              <li *ngFor= "let sub-route of route.children | section:section.key">
                 <a [routerLink]=sub-route.path>
                   <i class="fa fa-circle-o"></i>{{route.path}}
                 </a>

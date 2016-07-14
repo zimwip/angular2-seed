@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit, OnDestroy, Pipe, PipeTransform, HostBinding } from '@angular/core';
 import { REACTIVE_FORM_DIRECTIVES, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute, ROUTER_DIRECTIVES } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -7,9 +7,10 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 
 import { OpenDataService, Authentication } from '../../services';
+import {AppState} from "../../app.state";
 import { routes } from '../../';
 
-@Pipe({ name: 'terminal'})
+@Pipe({ name: 'section'})
 class TerminalPipe implements PipeTransform {
   public transform(value:Array<any>, section:string):Array<any> {
 
@@ -37,6 +38,8 @@ class TerminalPipe implements PipeTransform {
 export class MainMenuComponent implements OnInit, OnDestroy {
 
   search = new FormControl();
+  @HostBinding('class.sidebar-open')
+  isMenuCollapsed:boolean = false;
   currentRoute :any ;
   sections : any = [
     {key : 'main', label : "Main Navigation"},
@@ -45,11 +48,14 @@ export class MainMenuComponent implements OnInit, OnDestroy {
   ];
 
   private sub: any;
+  private collapse: any;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private authent: Authentication,
-              private openDataService: OpenDataService) {
+              private _state:AppState,
+              private openDataService: OpenDataService
+              ) {
     // bind search to query service.
     this.search.valueChanges
          .debounceTime(400)
@@ -67,10 +73,15 @@ export class MainMenuComponent implements OnInit, OnDestroy {
      this.currentRoute = data; // (+) converts string 'id' to a number
      // this.service.getHero(id).then(hero => this.hero = hero);
     });
+    this.collapse = this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
+      console.log("menu collapsed ", isCollapsed);
+      this.isMenuCollapsed = isCollapsed;
+    });
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+    this.collapse.unsubscribe();
   }
 
   isLoggedIn():boolean {
